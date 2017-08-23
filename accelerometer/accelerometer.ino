@@ -1,8 +1,8 @@
 #include <SPI.h> // Including SPI-library and defining the four pins of accelerometer
-#define SS   10
-#define MOSI 11
-#define MISO 12
-#define SCK  13
+#define SS   9
+#define MOSI 10
+#define MISO 11
+#define SCK  12
  
 #define SCALE 0.00007019 // LIS331 measures +-24 g so the scale is 48 G's in total (G = 9,81 m/s^2). Accelerations are measured in packages of 16 bits so the scale is: 48/2^16 = 0.00007019
  
@@ -10,7 +10,7 @@ double xAcc, yAcc, zAcc; // Three variables of type double. These store the valu
 double xMax, yMax, zMax; // These variables store the maximum values of each direction (x, y and z)
  
 void setup() {
-  pinMode(8, OUTPUT);
+  pinMode(6, OUTPUT);
   Serial.begin(9600);
   while (!Serial);
   SPI_SETUP();  
@@ -25,22 +25,23 @@ void loop() {
   Serial.print(" Y=");
   Serial.print(yAcc, 1);
   Serial.print(" Z=");
-  Serial.println(zAcc, 1);
-  /*testMelody();
+  Serial.print(zAcc, 1);
+  Serial.print("\t");
+  Serial.print("X="); 
+  Serial.print(xMax, 1);
+  Serial.print(" yMax=");
+  Serial.print(yMax, 1);
+  Serial.print(" zMax=");
+  Serial.println(zMax, 1);
+  magicWand();
 }
 
-/*void testMelody(){
-    if (xAcc < 2 || yAcc < 2 || zAcc > 2){
-        tone(8, 440, 1000);
-    }
-    if (xAcc < 2 || yAcc > 2 || zAcc < 2){
-        tone(8, 8800);
-    }
-    if (xAcc > 2 || yAcc < 2 || zAcc > 2){
-        tone(8, 880, 1000);
-    }
- }*/
+void magicWand(){
+    int pitch = (xAcc + yAcc + zAcc) * 4;
+    tone(6, pitch);
+ }
 } 
+
 void ReadAccVal(void){
   byte xAddressByteL = 0x28;      // Low Byte of X value (the first data register)
   byte readBit = B10000000;       // Bit 0 (MSB) HIGH means read register
@@ -69,7 +70,7 @@ void ReadAccVal(void){
   yAcc = yVal * SCALE;
   zAcc = zVal * SCALE;
 
-  /*if(xAcc > xMax){
+  if(xAcc > xMax){
     xMax = xAcc;
   }
   if(yAcc > yMax){
@@ -77,7 +78,7 @@ void ReadAccVal(void){
   }
   if(zAcc > zMax){
     zMax = zAcc;
-  }*/
+  }
   
 }
  
