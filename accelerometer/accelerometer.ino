@@ -33,7 +33,7 @@ void loop() {
   Serial.print(yMax, 1);
   Serial.print(" zMax=");
   Serial.println(zMax, 1);
-  magicWand();
+  //magicWand();
 }
 
 void magicWand(){
