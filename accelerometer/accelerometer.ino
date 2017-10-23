@@ -1,8 +1,8 @@
 #include <SPI.h> // Including SPI-library and defining the four pins of accelerometer
-#define SS   9
-#define MOSI 10
-#define MISO 11
-#define SCK  12
+#define SS   10
+#define MOSI 11
+#define MISO 12
+#define SCK  13
  
 #define SCALE 0.00007019 // LIS331 measures +-24 g so the scale is 48 G's in total (G = 9,81 m/s^2). Accelerations are measured in packages of 16 bits so the scale is: 48/2^16 = 0.00007019
  
