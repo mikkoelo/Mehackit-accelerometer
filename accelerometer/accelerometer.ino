@@ -40,7 +40,6 @@ void magicWand(){
     int pitch = (xAcc + yAcc + zAcc) * 4;
     tone(6, pitch);
  }
-} 
 
 void ReadAccVal(void){
   byte xAddressByteL = 0x28;      // Low Byte of X value (the first data register)
